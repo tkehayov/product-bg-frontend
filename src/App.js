@@ -2,6 +2,7 @@ import './App.css';
 import Header from './components/Header'
 import Slider from './components/Slider'
 import CategoryNav from './components/CategoryNav'
+import Product from './components/Product'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Col, Container, Row } from 'react-bootstrap'
@@ -11,6 +12,7 @@ function App() {
     <Router>
       <div className="App">
         <Header />
+        {/* HOME */}
         <Route path='/' exact render={(props) => (
           <Container>
             <Row>
@@ -23,6 +25,8 @@ function App() {
             </Row>
           </Container>
         )} />
+
+        <Route path='/product/:productName' render={(props) => <Product {...props} />} />
       </div>
     </Router>
   );
