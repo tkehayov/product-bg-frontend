@@ -1,14 +1,15 @@
 import React from 'react'
-import { Carousel } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap'
+import pizza from '../assets/pizza1.png'
+import pizza2 from '../assets/pizza1.png'
 
-function Caro() {
+function Slider() {
     return (
-        <>
         <Carousel>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://cantonata.net/wp-content/uploads/revslider/pizza/home_pizza_slider_2.png"
+                    src={pizza}
                     alt="First slide"
                 />
                 <Carousel.Caption>
@@ -19,7 +20,7 @@ function Caro() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://assets.biggreenegg.eu/app/uploads/2018/06/28115815/topimage-pizza-special17-800x500.jpg"
+                    src={pizza2}
                     alt="Second slide"
                 />
 
@@ -31,7 +32,7 @@ function Caro() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://cantonata.net/wp-content/uploads/revslider/pizza/home_pizza_slider_2.png"
+                    src={pizza}
                     alt="Third slide"
                 />
 
@@ -41,8 +42,7 @@ function Caro() {
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
-        </>
     )
 }
 
-export default Caro
+export default Slider
