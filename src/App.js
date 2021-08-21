@@ -26,7 +26,7 @@ function App() {
           </Container>
         )} />
 
-        <Route path='/product/:productName' render={(props) => <Product {...props} />} />
+        <Route path='/product/:id' render={(props) => <Product {...props} />} />
       </div>
     </Router>
   );
