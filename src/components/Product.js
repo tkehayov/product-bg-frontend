@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import ProductGallery from './ProductGallery'
-import ProductProperties from './ProductProperties'
+import ProductTabs from './ProductTabs'
 
 function Product(props) {
     const { id } = props.match.params
@@ -55,13 +55,16 @@ function Product(props) {
         <div>
             <Container>
                 <Row>
-                    <Col xs="6" className="border">
+                    <Col xs="7" className="border">
                         <ProductGallery images={images} />
                     </Col>
                     <Col xs="5" className="border">
                         <p>{product.name}</p>
-                        <ProductProperties properties={product.properties}/>
-                        
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <ProductTabs properties={product.properties} merchants={product.merchants} />
                     </Col>
                 </Row>
             </Container>
