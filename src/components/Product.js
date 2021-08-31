@@ -6,7 +6,7 @@ import ProductTabs from './ProductTabs'
 function Product(props) {
     const { id } = props.match.params
     const [product, setProduct] = useState([])
-    
+
     useEffect(() => {
         const getProduct = async () => {
             const productFromServer = await fetchProduct(id)
@@ -20,7 +20,7 @@ function Product(props) {
         const res = await fetch(`http://localhost:5000/products/${id}`)
         const data = await res.json()
 
-        return data;
+        return data
     }
 
     // TODO get from server
@@ -60,6 +60,7 @@ function Product(props) {
                     </Col>
                     <Col xs="5" className="border">
                         <p>{product.name}</p>
+                        <p>{product.minPrice}</p>
                     </Col>
                 </Row>
                 <Row>

@@ -16,9 +16,12 @@ function ProductTabs({ merchants, properties }) {
                         <tbody>{merchants ? merchants.map((merchant, index) => (
                             <tr key={index}>
                                 <td><Image src={merchant.logo} thumbnail /></td>
-                                <td><a href={merchant.url}> {merchant.title}</a></td>
-                                <td><label>{merchant.price}</label>
-                                    <label>{merchant.deliveryPrice}</label></td>
+                                <td>
+                                    <a href={merchant.url}> {merchant.productTitle}</a>
+                                </td>
+                                <td>
+                                    <label>{merchant.price}</label>
+                                    <label>{merchant.shippingFee}</label></td>
                                 <td><a href={merchant.url}>Към Магазина</a></td>
                             </tr>
 
