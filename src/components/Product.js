@@ -17,7 +17,7 @@ function Product(props) {
     }, [id])
 
     const fetchProduct = async (id) => {
-        const res = await fetch(`http://localhost:5000/products/${id}`)
+        const res = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/products/${id}`)
         const data = await res.json()
 
         return data
