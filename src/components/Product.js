@@ -6,11 +6,15 @@ import ProductTabs from './ProductTabs'
 function Product(props) {
     const { id } = props.match.params
     const [product, setProduct] = useState([])
+    const [gallery, setGallery] = useState([])
 
     useEffect(() => {
         const getProduct = async () => {
             const productFromServer = await fetchProduct(id)
+            const images = []
+            productFromServer.gallery.images.map((image) => images.push({ original: `${process.env.REACT_APP_BASICENDPOINT}/assets/products/${image}`, thumbnail: `${process.env.REACT_APP_BASICENDPOINT}/assets/products/${image}` }))
             setProduct(productFromServer)
+            setGallery(images)
         }
 
         getProduct()
@@ -23,40 +27,12 @@ function Product(props) {
         return data
     }
 
-    // TODO get from server
-    const images = [
-        {
-            original: 'https://picsum.photos/id/1018/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1018/1000/600/',
-        },
-        {
-            original: 'https://picsum.photos/id/1015/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1015/250/150/',
-        },
-        {
-            original: 'https://picsum.photos/id/1019/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1019/250/150/',
-        },
-        {
-            original: 'https://picsum.photos/id/1019/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1019/250/150/',
-        },
-        {
-            original: 'https://picsum.photos/id/1019/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1019/250/150/',
-        },
-        {
-            original: 'https://picsum.photos/id/1019/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1019/250/150/',
-        },
-    ];
-
     return (
         <div>
             <Container>
                 <Row>
                     <Col xs="7" className="border">
-                        <ProductGallery images={images} />
+                        <ProductGallery images={gallery} />
                     </Col>
                     <Col xs="5" className="border">
                         <p>{product.name}</p>
