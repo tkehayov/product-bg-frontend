@@ -1,5 +1,6 @@
 import React from 'react'
 import {Accordion } from 'react-bootstrap'
+import {Link} from 'react-router-dom';
 
 function CategoryNav() {
     return (
@@ -8,20 +9,20 @@ function CategoryNav() {
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>Лаптопи</Accordion.Header>
                     <Accordion.Body>
-                        <a className="nav-link" href="/">Всички</a>
-                        <a className="nav-link" href="/">Dell</a>
-                        <a className="nav-link" href="/">Asus</a>
-                        <a className="nav-link" href="/">Lenovo</a>
-                        <a className="nav-link" href="/">Acer</a>
-                        <a className="nav-link" href="/">HP</a>
-                        <a className="nav-link" href="/">Huawei</a>
-                        <a className="nav-link" href="/">MSI</a>
-                        <a className="nav-link" href="/">Apple</a>
-                        <a className="nav-link" href="/">Microsoft</a>
-                        <a className="nav-link" href="/">Toshiba</a>
-                        <a className="nav-link" href="/">Fujitsu</a>
-                        <a className="nav-link" href="/">Prestigio</a>
-                        <a className="nav-link" href="/">Gigabyte</a>
+                        <a className="nav-link" href="/category/all">Всички</a>
+                        <a className="nav-link" href="/category/dell">Dell</a>
+                        <a className="nav-link" href="/category/asus">Asus</a>
+                        <a className="nav-link" href="/category/laptops/lenovo">Lenovo</a>
+                        <a className="nav-link" href="/category/acer">Acer</a>
+                        <a className="nav-link" href="/category/hp">HP</a>
+                        <a className="nav-link" href="/category/huawei">Huawei</a>
+                        <a className="nav-link" href="/category/msi">MSI</a>
+                        <a className="nav-link" href="/category/apple">Apple</a>
+                        <a className="nav-link" href="/category/microsoft">Microsoft</a>
+                        <a className="nav-link" href="/category/toshiba">Toshiba</a>
+                        <a className="nav-link" href="/category/fujitsu">Fujitsu</a>
+                        <a className="nav-link" href="/category/prestigio">Prestigio</a>
+                        <a className="nav-link" href="/category/Gigabyte">Gigabyte</a>
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
@@ -74,7 +75,7 @@ function CategoryNav() {
                 <Accordion.Item eventKey="4">
                     <Accordion.Header>Монитори</Accordion.Header>
                     <Accordion.Body>
-                        <a className="nav-link" href="/">Всички</a>
+                        <Link className="nav-link" to="/category/all">Всички</Link>
                         <a className="nav-link" href="/">Dell</a>
                         <a className="nav-link" href="/">Acer</a>
                         <a className="nav-link" href="/">LG</a>
