@@ -67,18 +67,48 @@ function Category(props) {
 
         history.push({ search: urlParams.toString() })
 
+        // TODO SEND TO BACKEND
         // TODO REMOVE
-        // const urlFilters2 = urlParams.get('filter');
-        // console.log(decodeURIComponent(urlFilters2))
+        const urlFilters2 = urlParams.get('filter');
+        console.log(decodeURIComponent(urlFilters2))
     }
 
     const removeFilter = async (name, value) => {
         //TODO implement
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlFilters = urlParams.get('filter');
+
+        const uriComponents = decodeURIComponent(urlFilters)
+        const filters = JSON.parse(uriComponents)
+
+        if (filters.filter(f => f.name === name).length > 0) {
+
+            filters.forEach(filter => {
+                if (filter.name === name) {
+                    const indexElement = filter.values.indexOf(value)
+                    if (indexElement > -1) {
+                        filter.values.splice(indexElement, 1);
+                    }
+                }
+            })
+        }
+
+        var encodedUri = encodeURIComponent(JSON.stringify(filters));
+        urlParams.set("filter", encodedUri)
+
+
+        history.push({ search: urlParams.toString() })
+
+        // TODO SEND TO BACKEND
+        // TODO REMOVE
+        const urlFilters2 = urlParams.get('filter');
+        console.log(decodeURIComponent(urlFilters2))
+
     }
 
     return (
         <div >
-            <Filters filters={filters} onAddFilter={addFilter} />
+            <Filters filters={filters} onAddFilter={addFilter} onDeleteFilter={removeFilter} />
         </div>
     )
 }
