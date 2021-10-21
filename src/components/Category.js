@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Filters from './Filters'
+import ProductsCard from './ProductsCard'
 import { useHistory } from "react-router-dom"
+import { Col, Container, Row } from 'react-bootstrap'
 
 function Category(props) {
     const { category } = props.match.params
     // const { subcategory } = props.match.params
     const [filters, setFilters] = useState([])
+    const [products, setProducts] = useState([])
 
 
     const history = useHistory()
@@ -39,7 +42,13 @@ function Category(props) {
             urlParams.append("filter", strJSON)
 
             history.push({ search: urlParams.toString() })
+            
 
+            const products = urlParams.get('filter')
+            const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products/${products}`)
+            const aproductsResponseJson= await productsResponse.json()
+
+            setProducts(aproductsResponseJson)
             return
         }
 
@@ -67,10 +76,12 @@ function Category(props) {
 
         history.push({ search: urlParams.toString() })
 
-        // TODO SEND TO BACKEND
-        // TODO REMOVE
-        const urlFilters2 = urlParams.get('filter');
-        console.log(decodeURIComponent(urlFilters2))
+        const products = urlParams.get('filter')
+        const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products/${products}`)
+        const productsResponseJson= await productsResponse.json()
+        
+        setProducts(productsResponseJson)
+
     }
 
     const removeFilter = async (name, value) => {
@@ -107,8 +118,17 @@ function Category(props) {
     }
 
     return (
-        <div >
-            <Filters filters={filters} onAddFilter={addFilter} onDeleteFilter={removeFilter} />
+        <div>
+            <Container>
+                <Row>
+                <Col xs={3}>
+                    <Filters filters={filters} onAddFilter={addFilter} onDeleteFilter={removeFilter} />
+                </Col>
+                <Col xs={9} >
+                    <ProductsCard key={products.toString()} products={products} />
+                </Col>
+                </Row>
+            </Container>
         </div>
     )
 }
