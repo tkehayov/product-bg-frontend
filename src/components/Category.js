@@ -6,7 +6,6 @@ import { Col, Container, Row } from 'react-bootstrap'
 
 function Category(props) {
     const { category } = props.match.params
-    // const { subcategory } = props.match.params
     const [filters, setFilters] = useState([])
     const [products, setProducts] = useState([])
 
@@ -30,103 +29,55 @@ function Category(props) {
     }
 
 
-    const addFilter = async (name, value) => {
+    const addFilter = async (id, value) => {
         const urlParams = new URLSearchParams(window.location.search);
-        const urlFilters = urlParams.get('filter');
-
-        const uriComponents = decodeURIComponent(urlFilters)
-
-
-        if (urlFilters === null) {
-            var strJSON = encodeURIComponent(JSON.stringify([{ "name": name, "values": [value] }]));
-            urlParams.append("filter", strJSON)
-
-            history.push({ search: urlParams.toString() })
-            
-
-            const products = urlParams.get('filter')
-            const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products/${products}`)
-            const aproductsResponseJson= await productsResponse.json()
-
-            setProducts(aproductsResponseJson)
+        const filters = urlParams.getAll(id)
+        const indexElement = filters.indexOf(value)
+        if (indexElement > -1) {
             return
         }
-
-        const filters = JSON.parse(uriComponents)
-
-        //ADD value to already exists filter key/name
-        if (filters.filter(f => f.name === name).length > 0) {
-
-            filters.forEach(filter => {
-                //TODO consider to remove
-                if (filter.name === name) {
-                    if (!filter.values.includes(value)) {
-                        filter.values.push(value)
-                    }
-                }
-            })
-        } else {
-            //ADD new filter with key and value
-            filters.push({ "name": name, "values": [value] })
-
-        }
-        var encodedUri = encodeURIComponent(JSON.stringify(filters));
-        urlParams.set("filter", encodedUri)
-
+        urlParams.append(id, [value])
 
         history.push({ search: urlParams.toString() })
 
-        const products = urlParams.get('filter')
-        const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products/${products}`)
-        const productsResponseJson= await productsResponse.json()
-        
-        setProducts(productsResponseJson)
+        const products = urlParams.toString()
+        const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products?${products}`)
+        const aproductsResponseJson = await productsResponse.json()
 
+        setProducts(aproductsResponseJson)
     }
 
-    const removeFilter = async (name, value) => {
-        //TODO implement
-        const urlParams = new URLSearchParams(window.location.search);
-        const urlFilters = urlParams.get('filter');
+    const removeFilter = async (id, value) => {
+        const urlParams = new URLSearchParams(window.location.search)
+        const filters = urlParams.getAll(id)
 
-        const uriComponents = decodeURIComponent(urlFilters)
-        const filters = JSON.parse(uriComponents)
 
-        if (filters.filter(f => f.name === name).length > 0) {
-
-            filters.forEach(filter => {
-                if (filter.name === name) {
-                    const indexElement = filter.values.indexOf(value)
-                    if (indexElement > -1) {
-                        filter.values.splice(indexElement, 1);
-                    }
-                }
-            })
+        const indexElement = filters.indexOf(value)
+        if (indexElement > -1) {
+            filters.splice(indexElement, 1)
         }
+        urlParams.delete(id)
 
-        var encodedUri = encodeURIComponent(JSON.stringify(filters));
-        urlParams.set("filter", encodedUri)
-
-
+        filters.forEach(filter => {
+            urlParams.append(id, filter)
+        })
         history.push({ search: urlParams.toString() })
+        const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products?${products}`)
+        const aproductsResponseJson = await productsResponse.json()
 
-        // TODO SEND TO BACKEND
-        // TODO REMOVE
-        const urlFilters2 = urlParams.get('filter');
-        console.log(decodeURIComponent(urlFilters2))
-
+        setProducts(aproductsResponseJson)
     }
 
     return (
         <div>
             <Container>
                 <Row>
-                <Col xs={3}>
-                    <Filters filters={filters} onAddFilter={addFilter} onDeleteFilter={removeFilter} />
-                </Col>
-                <Col xs={9} >
-                    <ProductsCard key={products.toString()} products={products} />
-                </Col>
+                    <Col xs={3}>
+                        <Filters filters={filters} onAddFilter={addFilter} onDeleteFilter={removeFilter} />
+                    </Col>
+                    <Col xs={9} >
+                        <ProductsCard key={products.toString()} products={products} />
+                    </Col>
                 </Row>
             </Container>
         </div>

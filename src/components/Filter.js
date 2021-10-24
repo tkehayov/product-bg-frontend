@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 function Filter({ filter, onAddFilter, onDeleteFilter }) {
-
     return (
+
         <div>
             {filter.name}
             <Form>
@@ -12,7 +12,7 @@ function Filter({ filter, onAddFilter, onDeleteFilter }) {
                             type='checkbox'
                             id={value}
                             label={value}
-                            onChange={(e) => e.target.checked ? onAddFilter(filter.name, value) : onDeleteFilter(filter.name, value) }
+                            onChange={(e) => e.target.checked ? onAddFilter(filter.id, value) : onDeleteFilter(filter.id, value)}
                         />
                     </div>
                 )}
