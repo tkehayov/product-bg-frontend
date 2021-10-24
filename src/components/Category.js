@@ -28,7 +28,6 @@ function Category(props) {
         return data
     }
 
-
     const addFilter = async (id, value) => {
         const urlParams = new URLSearchParams(window.location.search);
         const filters = urlParams.getAll(id)
@@ -41,7 +40,7 @@ function Category(props) {
         history.push({ search: urlParams.toString() })
 
         const products = urlParams.toString()
-        const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products?${products}`)
+        const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products/${category}?${products}`)
         const aproductsResponseJson = await productsResponse.json()
 
         setProducts(aproductsResponseJson)
@@ -62,7 +61,7 @@ function Category(props) {
             urlParams.append(id, filter)
         })
         history.push({ search: urlParams.toString() })
-        const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products?${products}`)
+        const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products/${category}?${products}`)
         const aproductsResponseJson = await productsResponse.json()
 
         setProducts(aproductsResponseJson)

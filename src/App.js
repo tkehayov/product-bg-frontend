@@ -27,7 +27,7 @@ function App() {
           </Container>
         )} />
 
-        <Route path='/category/:category/:subcategory' render={(props) => <Category {...props} />} />
+        <Route path='/category/:category' render={(props) => <Category {...props} />} />
         <Route path='/product/:id' render={(props) => <Product {...props} />} />
       </div>
     </Router>

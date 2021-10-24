@@ -12,9 +12,6 @@ function ProductsCard({ products })
                     <ProductCard product={product} />
                 </Col>
             ))}
-
-
-
         </div>
     )
 }

@@ -9,20 +9,20 @@ function CategoryNav() {
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>Лаптопи</Accordion.Header>
                     <Accordion.Body>
-                        <a className="nav-link" href="/category/all">Всички</a>
-                        <a className="nav-link" href="/category/dell">Dell</a>
-                        <a className="nav-link" href="/category/asus">Asus</a>
-                        <a className="nav-link" href="/category/laptops/lenovo">Lenovo</a>
-                        <a className="nav-link" href="/category/acer">Acer</a>
-                        <a className="nav-link" href="/category/hp">HP</a>
-                        <a className="nav-link" href="/category/huawei">Huawei</a>
-                        <a className="nav-link" href="/category/msi">MSI</a>
-                        <a className="nav-link" href="/category/apple">Apple</a>
-                        <a className="nav-link" href="/category/microsoft">Microsoft</a>
-                        <a className="nav-link" href="/category/toshiba">Toshiba</a>
-                        <a className="nav-link" href="/category/fujitsu">Fujitsu</a>
-                        <a className="nav-link" href="/category/prestigio">Prestigio</a>
-                        <a className="nav-link" href="/category/Gigabyte">Gigabyte</a>
+                        <a className="nav-link" href="/category/laptops?brand=all">Всички</a>
+                        <a className="nav-link" href="/category/laptops?brand=dell">Dell</a>
+                        <a className="nav-link" href="/category/laptops?brand=asus">Asus</a>
+                        <a className="nav-link" href="/category/laptops?brand=lenovo">Lenovo</a>
+                        <a className="nav-link" href="/category/laptops?brand=acer">Acer</a>
+                        <a className="nav-link" href="/category/laptops?brand=hp">HP</a>
+                        <a className="nav-link" href="/category/laptops?brand=huawei">Huawei</a>
+                        <a className="nav-link" href="/category/laptops?brand=msi">MSI</a>
+                        <a className="nav-link" href="/category/laptops?brand=apple">Apple</a>
+                        <a className="nav-link" href="/category/laptops?brand=microsoft">Microsoft</a>
+                        <a className="nav-link" href="/category/laptops?brand=toshiba">Toshiba</a>
+                        <a className="nav-link" href="/category/laptops?brand=fujitsu">Fujitsu</a>
+                        <a className="nav-link" href="/category/laptops?brand=prestigio">Prestigio</a>
+                        <a className="nav-link" href="/category/laptops?brand=Gigabyte">Gigabyte</a>
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
