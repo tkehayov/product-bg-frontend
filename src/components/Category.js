@@ -60,8 +60,11 @@ function Category(props) {
         filters.forEach(filter => {
             urlParams.append(id, filter)
         })
-        history.push({ search: urlParams.toString() })
-        const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products/${category}?${products}`)
+
+        const urlParamsString = urlParams.toString()
+        history.push({ search: urlParamsString })
+
+        const productsResponse = await fetch(`${process.env.REACT_APP_BASICENDPOINT}/filters/products/${category}?${urlParamsString}`)
         const aproductsResponseJson = await productsResponse.json()
 
         setProducts(aproductsResponseJson)

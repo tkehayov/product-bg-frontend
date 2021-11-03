@@ -7,7 +7,6 @@ function ProductsCard({ products })
         <div className="row align-items-start">
 
             {products.map((product) => (
-                
                 <Col key={product.id}>
                     <ProductCard product={product} />
                 </Col>
