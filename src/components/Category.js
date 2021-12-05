@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Filters from './Filters'
 import ProductsCard from './ProductsCard'
+import ProductPagination from './ProductPagination'
 import { useHistory } from "react-router-dom"
 import { Col, Container, Row } from 'react-bootstrap'
 
 function Category(props) {
     const { category } = props.match.params
+
     const [filters, setFilters] = useState([])
     const [products, setProducts] = useState([])
 
@@ -35,6 +37,9 @@ function Category(props) {
         if (indexElement > -1) {
             return
         }
+
+        urlParams.delete("after")
+        urlParams.delete("before")
         urlParams.append(id, [value])
 
         history.push({ search: urlParams.toString() })
@@ -55,6 +60,9 @@ function Category(props) {
         if (indexElement > -1) {
             filters.splice(indexElement, 1)
         }
+
+        urlParams.delete("after")
+        urlParams.delete("before")
         urlParams.delete(id)
 
         filters.forEach(filter => {
@@ -78,7 +86,12 @@ function Category(props) {
                         <Filters filters={filters} onAddFilter={addFilter} onDeleteFilter={removeFilter} />
                     </Col>
                     <Col xs={9} >
-                        <ProductsCard key={products.toString()} products={products} />
+                        <Row>
+                            <ProductsCard key={products.toString()} products={products} />
+                        </Row>
+                        <Row>
+                            <ProductPagination products={products} addFilter={addFilter} />
+                        </Row>
                     </Col>
                 </Row>
             </Container>
